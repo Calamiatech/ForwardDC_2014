@@ -1,0 +1,534 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"highlight",
+				"highlight1"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "<?php get_template_part('templates/head'); ?>\n<body <?php body_class(); ?>>\n\n  <!--[if lt IE 8]>\n    <div class=\"alert alert-warning\">\n      <?php _e('You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/\">upgrade your browser</a> to improve your experience.', 'roots'); ?>\n    </div>\n  <![endif]-->\n\n  <?php\n    do_action('get_header');\n    // Use Bootstrap's navbar if enabled in config.php\n    if (current_theme_supports('bootstrap-top-navbar')) {\n      get_template_part('templates/header-top-navbar');\n    } else {\n      get_template_part('templates/header');\n    }\n  ?>\n\n  <?php if (!is_front_page()): ?>\n  <div class=\"wrap container\" role=\"document\">\n    <div class=\"content row\">\n      <main class=\"main <?php echo roots_main_class(); ?>\" role=\"main\">\n        <?php include roots_template_path(); ?>\n      </main><!-- /.main -->\n      <?php if (roots_display_sidebar()) : ?>\n        <aside class=\"sidebar <?php echo roots_sidebar_class(); ?>\" role=\"complementary\">\n          <?php include roots_sidebar_path(); ?>\n        </aside><!-- /.sidebar -->\n      <?php endif; ?>\n    </div><!-- /.content -->\n  </div><!-- /.wrap -->\n\n  <?php get_template_part('templates/footer'); ?>\n\n</body>\n</html>\n",
+			"file": "base.php",
+			"file_size": 1204,
+			"file_write_time": 130388080530000000,
+			"settings":
+			{
+				"buffer_size": 1238,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/less/bootstrap/variables.less",
+			"settings":
+			{
+				"buffer_size": 25388,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/less/bootstrap/bootstrap.less",
+			"settings":
+			{
+				"buffer_size": 1071,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "front-page.php",
+			"settings":
+			{
+				"buffer_size": 113,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "",
+			"file": "templates/front-page.php",
+			"file_size": 42,
+			"file_write_time": 130401739787297902,
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "page.php",
+			"settings":
+			{
+				"buffer_size": 113,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/content.php",
+			"settings":
+			{
+				"buffer_size": 285,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/header.php",
+			"settings":
+			{
+				"buffer_size": 476,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<header class=\"banner navbar navbar-default navbar-static-top\" role=\"banner\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"glyphicon glyphicon-th-list\"></span>\n        <!-- \n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span> -->\n      </button>\n      <a class=\"navbar-brand\" href=\"<?php echo home_url(); ?>/\"><span class=\"sr-only\"><?php bloginfo('name'); ?><span><img src=\"\" alt=\"\"></a>\n    </div>\n\n    <nav class=\"collapse navbar-collapse\" role=\"navigation\">\n      <?php\n        if (has_nav_menu('primary_navigation')) :\n          wp_nav_menu(array('theme_location' => 'primary_navigation', 'menu_class' => 'nav navbar-nav'));\n        endif;\n      ?>\n    </nav>\n  </div>\n</header>\n",
+			"file": "templates/header-top-navbar.php",
+			"file_size": 895,
+			"file_write_time": 130401756415652830,
+			"settings":
+			{
+				"buffer_size": 942,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/footer.php",
+			"settings":
+			{
+				"buffer_size": 235,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 265.0,
+		"selected_items":
+		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"install	",
+				"Package Control: Install Package"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Packa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Steve/Documents/GitHub/ForwardDC_2014/templates/page-header.php",
+		"/C/Users/Steve/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Steve/AppData/Roaming/Sublime Text 2/Packages/LESS/README.md",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/Steve/Documents/GitHub/GiantRobot/assets/less/app.less",
+		"/C/Users/Steve/Dropbox/Metagrapher LLC/Web/88DC/title-order/index.php"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"build",
+			"navbar"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "base.php",
+					"settings":
+					{
+						"buffer_size": 1238,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								647,
+								647
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "assets/less/bootstrap/variables.less",
+					"settings":
+					{
+						"buffer_size": 25388,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11062,
+								11062
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 6012.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "assets/less/bootstrap/bootstrap.less",
+					"settings":
+					{
+						"buffer_size": 1071,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "front-page.php",
+					"settings":
+					{
+						"buffer_size": 113,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								113,
+								113
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "templates/front-page.php",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "page.php",
+					"settings":
+					{
+						"buffer_size": 113,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "templates/content.php",
+					"settings":
+					{
+						"buffer_size": 285,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								273,
+								273
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "templates/header.php",
+					"settings":
+					{
+						"buffer_size": 476,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								456,
+								456
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "templates/header-top-navbar.php",
+					"settings":
+					{
+						"buffer_size": 942,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								633,
+								633
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 251.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "templates/footer.php",
+					"settings":
+					{
+						"buffer_size": 235,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 118.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 212.0,
+	"status_bar_visible": true
+}
