@@ -27,9 +27,9 @@ function roots_scripts() {
     wp_register_script( 'typekit', '//use.typekit.net/fsz3ssw.js', array(), null, false );
   }
 
-  if (!is_admin() && !is_single() && current_theme_supports('isotope')) {
+  if (!is_admin() && current_theme_supports('isotope')) {
     wp_deregister_script( 'isotope' );
-    wp_register_script( 'isotope', get_template_directory_uri() . '/assets/js/vendor/isotope.pkgd.min.js.lnk', array('jquery'), '2.0b', true );
+    wp_register_script( 'isotope', $src, $deps, $ver, $in_footer );
   }
 
   if (is_single() && comments_open() && get_option('thread_comments')) {
@@ -42,7 +42,6 @@ function roots_scripts() {
   wp_enqueue_script( 'typekit' );
   wp_enqueue_script('jquery');
   wp_enqueue_script('roots_scripts');
-  wp_enqueue_script('isotope' );
 }
 add_action('wp_enqueue_scripts', 'roots_scripts', 100);
 
