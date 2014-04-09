@@ -4,6 +4,8 @@
 
 @import "bootstrap/bootstrap.less";
 
+@import "animations.less";
+
 /* ==========================================================================
    Base
    ========================================================================== */
@@ -16,6 +18,8 @@ body {
       font-family: @font-family-serif;
    }
 }
+
+.animatable { position: absolute; }
 
 
 /* ==========================================================================
@@ -57,6 +61,28 @@ body.admin-bar .navbar {
       center center;
    background-size: cover;
 }
+
+#hero_container:before {
+   content: "";
+   display: block;
+   height: 100px;
+}
+#hero_container img {
+   // position: absolute;
+}
+
+#p_ball {
+   top: 25%;
+   z-index: @anim-z + 10;
+}
+
+#spike_formation {
+   top: -5%;
+   left: 21%;
+   z-index: @anim-z + 5;
+
+}
+
 
 
 
