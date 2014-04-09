@@ -22,7 +22,7 @@ function create_fwddc_artist_post_type() {
 		'view_item' => __('View Artist', 'roots'),	
 		'rewrite' => array('slug' => 'artists'),
 		'supports' => $support,
-		'capability_type' => 'page',
+		'capability_type' => 'post',
 	);
 	register_post_type( 'fwddc_artist', $args);
 }
