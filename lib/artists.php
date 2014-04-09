@@ -34,6 +34,43 @@ add_action( 'init', 'create_fwddc_artist_post_type' );
  */
  
  /**
+  * Statuses Taxonomy
+  */
+function register_fwddc_artist_status_taxonomy() {
+	$labels = array (
+        'name' 			=> _x( "Statuses", 'taxonomy general name', 'roots' ),
+        'singular_name' => _x( 'status', 'taxonomy singular name', 'roots' ),
+        'search_items' 	=> __( 'Search statuses', 'roots' ),
+        'all_items' 	=> __( 'All statuses', 'roots' ),
+        'parent_item' 	=> __( 'Parent status', 'roots'),
+        'parent_item_colon' => __( 'Parent status:', 'roots'),
+        'edit_item' 	=> __( 'Edit status', 'roots'),
+        'update_item' 	=> __( 'Update status', 'roots'),
+        'add_new_item' 	=> __( 'Add New status', 'roots'),
+		'new_item_name' => __( 'New status Name', 'roots'),
+		'menu_name'		=> __( 'status', 'roots' ),
+    );
+	$args = array (
+     	'labels' => $labels,
+        'hierarchical' =>true,
+        'show_ui' => true,
+        'show_tagcloud' => true,
+        'show_admin_column' => true,
+        'rewrite' => array( 'slug' => 'status' ),
+        'public'=>true,
+    );
+	register_taxonomy('fwddc_artist_status', 'fwddc_artist', $args );
+}
+add_action('init', 'register_fwddc_artist_status_taxonomy');
+
+function populate_fwddc_artists_status_taxonomy(){
+	addTaxTerm("Headliner", 'fwddc_artists_status', array( 'description' => 'Headliner for a Forward DC show, past or present'));
+	addTaxTerm("Veteran", 'fwddc_artists_status', array( 'description' => 'An artist who has participated in Forward for two or more years'));
+	addTaxTerm("Local", 'fwddc_artists_status', array( 'description' => 'An artist local to the DC/MD/VA'));
+}
+add_action('admin_init','populate_fwddc_artists_status_taxonomy');
+
+/**
   * Genres Taxonomy
   */
 function register_fwddc_artist_genre_taxonomy() {
