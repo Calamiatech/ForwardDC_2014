@@ -12,8 +12,8 @@
 <?php if ($wp_query->max_num_pages > 1) : ?>
   <nav class="post-nav">
     <ul class="pager">
-      <li class="previous"><?php next_posts_link(__('<span class="glyphicon glyphicon-chevron-left"></span> Next', 'roots')); ?></li>
-      <li class="next"><?php previous_posts_link(__('Prev <span class="glyphicon glyphicon-chevron-right"></span>', 'roots')); ?></li>
+      <li class="next"><?php next_posts_link(__('Next <span class="glyphicon glyphicon-chevron-right"></span>', 'roots')); ?></li>
+      <li class="previous"><?php previous_posts_link(__('<span class="glyphicon glyphicon-chevron-left"></span> Prev', 'roots')); ?></li>
     </ul>
   </nav>
 <?php endif; ?>
