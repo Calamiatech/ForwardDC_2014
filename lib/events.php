@@ -46,6 +46,17 @@ add_action( 'add_meta_boxes_events', 'add_events_boxes', 10, 2);
 */
 
 /**
+ * Events Meta Boxes
+ *   we need:
+ *     title, date, venue, cost, brownpapertickets
+ */
+// function add_events_meta_boxes( $post ) {
+// 	add_meta_box( 'fwddc_event_date', __('Event Date', 'roots'), 'date_meta', 'events', 'normal' );
+// 	add_meta_box( 'fwddc_event_venue', __('Event Venue','roots'), 'venue_meta', 'events', 'normal' );
+// }
+// add_action( 'add_meta_boxes_events', 'add_events_boxes', 10, 2);
+
+/**
  * Artists Taxonomy
  */
 function register_fwddc_artists_taxonomy(){
