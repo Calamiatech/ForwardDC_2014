@@ -6,17 +6,44 @@ function create_event_post_type() {
 		'name' => __( 'Events' ),
 		'singular_name' => __( 'Event' ),
 	);
+	$supports = array(
+		'title',
+		'revisions',
+		'custom-fields',
+		'comments',
+		'revisions',
+	);
 	$args = array(
 		'labels' => $labels,
 		'public' => true,
 		'menu_position' => 7,
 		'menu_icon' => 'dashicons-calendar',
 		'has_archive' => true,
+		'hierarchical' => true,
+		'add_new_item' => __('Add New Event', 'roots'),
+		'edit_item' => __('Edit Event', 'roots'),
+		'new_item' => __('New Event', 'roots'),
+		'view_item' => __('View Event', 'roots'),	
 		'rewrite' => array('slug' => 'events'),
+		'supports' => $supports,
+		'capability_type' => 'post',
 	);
 
 	register_post_type( 'fwddc_event', $args);
 }
+
+/*
+ * Events Meta Boxes
+ *   we need:
+ *     title, date, venue, cost, brownpapertickets
+ */
+/*
+function add_events_meta_boxes( $post ) {
+	add_meta_box( 'fwddc_event_date', __('Event Date', 'roots'), 'date_meta', 'events', 'normal' );
+	add_meta_box( 'fwddc_event_venue', __('Event Venue','roots'), 'venue_meta', 'events', 'normal' );
+}
+add_action( 'add_meta_boxes_events', 'add_events_boxes', 10, 2);
+*/
 
 /**
  * Artists Taxonomy
