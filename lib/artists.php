@@ -38,8 +38,8 @@ add_action( 'init', 'create_fwddc_artist_post_type' );
   */
 function register_fwddc_artist_status_taxonomy() {
 	$labels = array (
-        'name' 			=> _x( "Statuses", 'taxonomy general name', 'roots' ),
-        'singular_name' => _x( 'status', 'taxonomy singular name', 'roots' ),
+        'name' 			=> _x( "Status", 'taxonomy general name', 'roots' ),
+        'singular_name' => _x( 'Status', 'taxonomy singular name', 'roots' ),
         'search_items' 	=> __( 'Search statuses', 'roots' ),
         'all_items' 	=> __( 'All statuses', 'roots' ),
         'parent_item' 	=> __( 'Parent status', 'roots'),

@@ -9,7 +9,8 @@ module.exports = function(grunt) {
             all: [
                 'Gruntfile.js',
                 'assets/js/*.js',
-                '!assets/js/scripts.min.js'
+                '!assets/js/scripts.min.js',
+                '!assets/js/artists-isotope.min.js'
             ]
         },
         less: {
@@ -48,6 +49,9 @@ module.exports = function(grunt) {
                         'assets/js/plugins/bootstrap/affix.js',
                         'assets/js/plugins/*.js',
                         'assets/js/_*.js'
+                    ],
+                    'assets/js/artists-isotope.min.js': [
+                        'assets/js/artists-isotope.js'
                     ]
                 },
                 options: {

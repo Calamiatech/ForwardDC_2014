@@ -6,7 +6,8 @@ $post_classes = array(
 	
 	'col-sm-6',
 	'col-md-4',
-	'col-lg-2',
+	'col-lg-3',
+	'col-xl-2',
 
 	'isotope-ready',
 	);
@@ -14,13 +15,17 @@ $post_classes = array(
 $genres = get_the_terms( $post->ID, 'fwddc_artist_genre' );
 if ($genres && ! is_wp_error( $genres )) {
 	foreach ($genres as $genre) {
-		$post_classes[] = $genre->name;
+		$post_classes[] = str_replace(' ', '_', $genre->name);
+	}
+}
+$events = get_the_terms( $post->ID, 'fwddc_events' );
+if ($events && ! is_wp_error( $events )) {
+	foreach ($events as $event) {
+		$post_classes[] = preg_replace('/[^A-Za-z0-9]/', '', $event->name);
 	}
 }
 ?>
 <article <?php post_class($post_classes); ?>>    
-	<div id="artist-content">
-	    <?php the_post_thumbnail('large',array('class'=>'img-responsive')); ?>
-		<h4 class="artist-name"><?php the_title(); ?></h4>
-	</div>
+    <?php the_post_thumbnail('large',array('class'=>'img-responsive')); ?>
+	<h4 class="artistName"><?php the_title(); ?></h4>
 </article>
