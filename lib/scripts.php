@@ -29,7 +29,7 @@ function roots_scripts() {
 
   if (!is_admin() && !is_single() && current_theme_supports('isotope')) {
     wp_deregister_script( 'isotope' );
-    wp_register_script( 'isotope', get_template_directory_uri() . '/assets/js/vendor/isotope.pkgd.min.js.lnk', array('jquery'), '2.0b', false );
+    wp_register_script( 'isotope', get_template_directory_uri() . '/assets/js/vendor/isotope.pkgd.min.js', array('jquery'), 'v2.0.0', false );
   }
 
   if (is_single() && comments_open() && get_option('thread_comments')) {

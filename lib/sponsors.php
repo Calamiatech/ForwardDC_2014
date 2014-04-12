@@ -42,10 +42,12 @@ function fwddc_sponsor_url_meta( $post ) {
 	wp_nonce_field( 'fwddc_sponsor_url_meta_box', 'fwddc_sponsor_url_meta_box_nonce' );
 
 	$url = get_post_meta( $post->ID, '_fwddc_sponsor_url', TRUE );
-	if ( ! $url ) $url = "http://";
+	if ( ! $url ) {
+		$url = "http://";
+	}
 	//include( get_template_part( 'templates/url-meta' ) );
 	?>
-	<input type="text" name="fwddc_url_text" id="fwddc_url_text" value="<?php echo $url ?>" style="width: 100%;" />
+	<input type="text" name="fwddc_sponsor_url" id="fwddc_sponsor_url" value="<?php echo $url ?>" style="width: 100%;" />
 	<?php
 }
 
@@ -62,7 +64,7 @@ function fwddc_save_sponsor_url_meta_box_data( $post_id ) {
 	}
 
 	// Verify that the nonce is valid.
-	if ( ! wp_verify_nonce( $_POST['fwddc_sponsor_url_meta_box_nonce'], 'fwddc_sponsor_url' ) ) {
+	if ( ! wp_verify_nonce( $_POST['fwddc_sponsor_url_meta_box_nonce'], 'fwddc_sponsor_url_meta_box' ) ) {
 		return;
 	}
 
@@ -80,6 +82,11 @@ function fwddc_save_sponsor_url_meta_box_data( $post_id ) {
 	
 	// Make sure that it is set.
 	if ( ! isset( $_POST['fwddc_sponsor_url'] ) ) {
+		return;
+	}
+
+	// Prevent default from appearing
+	if ($_POST['fwddc_sponsor_url'] == "http://") {
 		return;
 	}
 
