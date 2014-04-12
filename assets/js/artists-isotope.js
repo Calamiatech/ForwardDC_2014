@@ -30,8 +30,11 @@ jQuery(document).ready(function() {
         });
 
         jQuery(window).resize(function() {
-            jQuery('article.fwddc_artist').css({
-                'height': jQuery(this).width() + "px"
+            jQuery("article.fwddc_artist").each(function() {
+                var $this = jQuery(this);
+                $this.css({
+                    "height": $this.width() + "px"
+                });
             });
         });
     });

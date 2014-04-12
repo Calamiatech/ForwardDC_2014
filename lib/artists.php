@@ -30,6 +30,67 @@ add_action( 'init', 'create_fwddc_artist_post_type' );
 
 
 /**
+ * Artists Meta Boxes
+ *  we need:
+ *      title, thumbnail, url, facebook, twitter, soundcloud
+**/
+function add_artists_meta_boxes( $post ) {
+    add_meta_box( 'fwddc_artist_fb', __('Artist\'s Facebook Page', 'roots'), 'fwddc_artist_meta', 'fwddc_artist', 'normal', 'default', array( 'name' => 'fb', 'prefix' => 'http://facebook.com/' ) );
+    add_meta_box( 'fwddc_artist_twitter', __('Artist\'s Twitter', 'roots'), 'fwddc_artist_meta', 'fwddc_artist', 'normal', 'default', array( 'name' => 'twitter', 'prefix' => 'http://twitter.com/' ) );
+    add_meta_box( 'fwddc_artist_soundcloud', __('Artist\'s SoundCloud', 'roots'), 'fwddc_artist_meta', 'fwddc_artist', 'normal', 'default', array( 'name' => 'soundcloud', 'prefix' => 'https://soundcloud.com/' ) );
+}
+add_action( 'add_meta_boxes', 'add_artists_meta_boxes');
+
+function fwddc_artist_meta( $post, $meta_name ) {
+    $name = $meta_name['args']['name'];
+    $action = 'fwddc_artist_'.$name.'_meta_box';
+    $nonce_name = 'fwddc_artist_'.$name.'_meta_box_nonce';
+    $input_name = 'fwddc_'.$name.'_url';
+    wp_nonce_field( $action, $nonce_name );
+
+    $url = get_post_meta( $post->ID, '_'.$input_name, TRUE );
+
+    echo '<label for="'.$input_name.'">'.$meta_name['args']['prefix'].'</label><input type="text" name="'.$input_name.'" id="'.$input_name.'" value="'.$url.'" style="width: 50%;" />';
+}
+
+function fwddc_save_artist_meta_box_data( $post_id ) { 
+
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    } 
+
+    $meta_boxes = array(
+        'fb',
+        'twitter',
+        'soundcloud'
+    );
+
+    foreach ($meta_boxes as $box) {
+        $action = 'fwddc_artist_'.$box.'_meta_box';
+        $nonce = $action.'_nonce';
+ 
+        if ( ! isset( $_POST[$nonce] ) ) {
+            continue;
+        }
+        if ( ! wp_verify_nonce( $_POST[$nonce], $action ) ) {
+            continue;
+        }   
+        if ( ! isset( $_POST['fwddc_'.$box.'_url'] ) ) {
+            continue;
+        }
+        $meta_data = sanitize_text_field( $_POST['fwddc_'.$box.'_url'] );
+        update_post_meta( $post_id, '_fwddc_'.$box.'_url', $meta_data );
+    }
+}
+add_action( 'save_post', 'fwddc_save_artist_meta_box_data' );
+
+
+
+/**
  * Custom Taxonomies for Artist post type
  */
  
@@ -62,6 +123,8 @@ function register_fwddc_artist_status_taxonomy() {
 	register_taxonomy('fwddc_artist_status', 'fwddc_artist', $args );
 }
 add_action('init', 'register_fwddc_artist_status_taxonomy');
+
+
 
 function populate_fwddc_artists_status_taxonomy(){
 	addTaxTerm("Headliner", 'fwddc_artists_status', array( 'description' => 'Headliner for a Forward DC show, past or present'));
