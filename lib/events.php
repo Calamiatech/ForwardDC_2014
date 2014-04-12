@@ -8,6 +8,7 @@ function create_event_post_type() {
 	);
 	$supports = array(
 		'title',
+		'editor',
 		'revisions',
 		'custom-fields',
 		'comments',
