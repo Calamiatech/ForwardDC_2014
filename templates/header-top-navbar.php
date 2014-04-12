@@ -10,7 +10,7 @@
         <img src="<?php bloginfo('template_directory') ?>/assets/img/FORWARD_2014_logo_small-02.svg" height="45px" alt=""></a>
     </div>
 
-    <nav class="collapse navbar-collapse" role="navigation">
+    <nav class="collapse navbar-collapse small navbar-right" role="navigation">
       <?php
         if (has_nav_menu('primary_navigation')) :
           wp_nav_menu(array('theme_location' => 'primary_navigation', 'menu_class' => 'nav navbar-nav tk-changeling-neo'));
@@ -19,4 +19,4 @@
     </nav>
   </div>
 </header>
-<img src="/wp-content/themes/roots/assets/img/top_banner.png" class="img-responsive" id="topbar">
+<img src="/wp-content/themes/roots/assets/img/top_banner.png" class="img-responsive hidden-md hidden-sm hidden-xs" id="topbar">
