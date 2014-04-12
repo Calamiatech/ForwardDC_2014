@@ -1,7 +1,5 @@
 <?php
-add_action( 'init', 'create_event_post_type' );
-
-function create_event_post_type() {
+function create_fwddc_event_post_type() {
 	$labels = array(
 		'name' => __( 'Events' ),
 		'singular_name' => __( 'Event' ),
@@ -9,14 +7,14 @@ function create_event_post_type() {
 	$supports = array(
 		'title',
 		'editor',
-		'revisions',
-		'custom-fields',
+		'thumbnail',
 		'comments',
 		'revisions',
 	);
 	$args = array(
 		'labels' => $labels,
 		'public' => true,
+		'menu_name' => 'Events',
 		'menu_position' => 7,
 		'menu_icon' => 'dashicons-calendar',
 		'has_archive' => true,
@@ -32,17 +30,14 @@ function create_event_post_type() {
 
 	register_post_type( 'fwddc_event', $args);
 }
+add_action( 'init', 'create_fwddc_event_post_type' );
 
 /**
  * Events Meta Boxes
  *   we need:
  *     title, date, venue, cost, brownpapertickets
  */
-// function add_events_meta_boxes( $post ) {
-// 	add_meta_box( 'fwddc_event_date', __('Event Date', 'roots'), 'date_meta', 'events', 'normal' );
-// 	add_meta_box( 'fwddc_event_venue', __('Event Venue','roots'), 'venue_meta', 'events', 'normal' );
-// }
-// add_action( 'add_meta_boxes_events', 'add_events_boxes', 10, 2);
+// wp_nonce_field( 'myplugin_meta_box', 'myplugin_meta_box_nonce' );;
 
 
 /**
