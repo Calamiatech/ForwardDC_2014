@@ -18,11 +18,11 @@ function create_fwddc_event_post_type() {
 		'menu_position' => 7,
 		'menu_icon' => 'dashicons-calendar',
 		'has_archive' => true,
-		'hierarchical' => true,
 		'add_new_item' => __('Add New Event', 'roots'),
 		'edit_item' => __('Edit Event', 'roots'),
 		'new_item' => __('New Event', 'roots'),
 		'view_item' => __('View Event', 'roots'),	
+		'not_found' => __('No Events Found', 'roots'),
 		'rewrite' => array('slug' => 'events'),
 		'supports' => $supports,
 		'capability_type' => 'post',
@@ -37,7 +37,6 @@ add_action( 'init', 'create_fwddc_event_post_type' );
  *   we need:
  *     title, date, venue, cost, brownpapertickets
  */
-// wp_nonce_field( 'myplugin_meta_box', 'myplugin_meta_box_nonce' );;
 
 
 /**

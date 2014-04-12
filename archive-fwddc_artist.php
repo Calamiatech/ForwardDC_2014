@@ -1,9 +1,11 @@
 <?php get_template_part('templates/page', 'header'); ?>
 
-<section class="container-fluid">
+<section class="container-fluid js-isotope" id="artists-container" data-isotope-options='{ itemSelector: ".artist", masonry: { columnWidth: ".artist", gutter:5, isFitWidth: true }}'>
+	<div class="row artistsFilter">
+	</div>
   <div class="row">
 <?php while (have_posts()) : the_post(); ?>
-  <?php get_template_part('templates/content', 'isotope'); ?>
+  <?php get_template_part('templates/artist', 'isotope'); ?>
 <?php endwhile; ?>
   </div>
 </section>

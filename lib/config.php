@@ -9,6 +9,7 @@ add_theme_support('nice-search');           // Enable /?s= to /search/ redirect
 add_theme_support('jquery-cdn');            // Enable to load jQuery from the Google CDN
 add_theme_support('typekit');               // Enable Typekit Font Support
 add_theme_support('post_thumbnails');        // Enable thumbnails (not by default?!)
+add_theme_support('isotope');               // Enable isotope 
 
 /**
  * Configuration values

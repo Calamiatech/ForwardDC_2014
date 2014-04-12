@@ -125,7 +125,7 @@ function register_fwddc_events_taxonomy(){
         'show_admin_column' => true,
         'show_in_nav_menus' => false,
         'query_var' => 'event',
-        'rewrite' => array( 'slug' => 'events' ),
+        'rewrite' => array( 'slug' => 'events_taxo' ),
         'public'=>true,
     );
     $post_types = array(
