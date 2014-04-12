@@ -79,6 +79,10 @@ function register_fwddc_artists_taxonomy(){
 }
 add_action('init', 'register_fwddc_artists_taxonomy');
 
+/**
+ * Populate the artists taxonomy with existing artists' names
+ * so that they can be tagged to the event.
+ **/
 function populate_fwddc_artists_taxonomy(){
 	/**
 	 * The WordPress Query class.
