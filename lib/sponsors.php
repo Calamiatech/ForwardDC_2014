@@ -28,3 +28,13 @@ function create_sponsor_post_type() {
 
 	register_post_type( 'fwddc_sponsor', $args );
 }
+
+/**
+ * Events Meta Boxes
+ *   we need:
+ *     title, date, venue, cost, brownpapertickets
+ */
+function add_sponsors_meta_boxes( $post ) {
+	add_meta_box( 'fwddc_sponsor_url', __('Sponsor Website','roots'), 'url_meta', 'sponsors', 'normal' );
+}
+add_action( 'add_meta_boxes_events', 'add_events_boxes', 10, 2);

@@ -44,6 +44,7 @@ function create_event_post_type() {
 // }
 // add_action( 'add_meta_boxes_events', 'add_events_boxes', 10, 2);
 
+
 /**
  * Artists Taxonomy
  */
