@@ -1,2 +1,2 @@
-<input type="hidden" name="url_noncename" id="url_noncename" value="<?php echo wp_create_nonce( 'url'.$post->ID );?>" />
-<input type="text" name="url_text" id="url_text" value="<?php echo $url ?>" />
+<input type="hidden" name="fwddc_url_noncename" id="fwddc_url_noncename" value="<?php echo wp_create_nonce( 'fwddc_url'.$post->ID );?>" />
+<input type="text" name="fwddc_url_text" id="fwddc_url_text" value="<?php echo $url ?>" />
