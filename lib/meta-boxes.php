@@ -1,8 +1,12 @@
-<?
-function url_meta($post) {
-	$url = get_post_meta($post->ID, '_fwddc_url', TRUE);
-	if (!$url) $url = "";
-	include(get_template_part('templates/url-meta'));
+<?php
+function url_meta( $post ) {
+	$url = get_post_meta( $post->ID, '_fwddc_url', TRUE );
+	if ( ! $url ) $url = "";
+	//include( get_template_part( 'templates/url-meta' ) );
+	?>
+	<input type="hidden" name="fwddc_url_noncename" id="fwddc_url_noncename" value="<?php echo wp_create_nonce( 'fwddc_url'.$post->ID );?>" />
+	<input type="text" name="fwddc_url_text" id="fwddc_url_text" value="<?php echo $url ?>" />
+	<?php
 }
 
 function fwddc_save_url_meta_box_data( $post_id ) {
