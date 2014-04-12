@@ -36,7 +36,7 @@ function create_venue_post_type() {
  *      title, thumbnail, url, address
 **/
 function add_venues_meta_boxes( $post ) {
-    add_meta_box( 'fwddc_venue_url', __('Venue\'s Web Page', 'roots'), 'fwddc_venue_meta', 'fwddc_venue', 'normal', 'default', array( 'name' => 'url', 'prefix' => '' ) );
+    add_meta_box( 'fwddc_venue_url', __('Venue\'s Web Page', 'roots'), 'fwddc_venue_meta', 'fwddc_venue', 'normal', 'default', array( 'name' => 'url', 'prefix' => 'http://' ) );
     add_meta_box( 'fwddc_venue_address', __('Venue Address', 'roots'), 'fwddc_venue_meta', 'fwddc_venue', 'normal', 'default', array( 'name' => 'address', 'prefix' => '' ) );
 }
 add_action( 'add_meta_boxes', 'add_venues_meta_boxes');
