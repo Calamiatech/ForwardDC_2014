@@ -19,6 +19,7 @@ function create_venue_post_type() {
 		'menu_position' => 8,
 		'menu_icon' => 'dashicons-location-alt',
 		'supports' => $support,
+        'hierarchical' => true,
 		'has_archive' => true,
 		'add_new_item' => __('Add New Venue', 'root'),
 		'edit_item' => __('Edit Venue', 'root'),
