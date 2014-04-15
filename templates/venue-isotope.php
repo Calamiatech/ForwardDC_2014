@@ -2,7 +2,7 @@
 <?php
 /* Post Container Styles */
 $post_classes = array(
-	'artist',
+	'venue',
 	
 	'col-sm-6',
 	'col-md-4',

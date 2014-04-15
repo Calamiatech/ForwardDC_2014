@@ -12,7 +12,7 @@
 		?>
 		<div class="genresFilter col-lg-3 col-xs-12 filterGroup" data-filter-group="genres">
 			<label for="genresFilterDropdown">Genres</label>
-			<select class="filter_dropdown" name="genresFilterDropdown" id="genresFilterDropdown">
+			<select class="filter_dropdown col-lg-12" name="genresFilterDropdown" id="genresFilterDropdown">
 				<option value="" selected="true">All</option>
 				<?php
 					foreach ($genres_list as $genre){
@@ -38,7 +38,7 @@
 		?>
 		<div class="eventsFilter col-lg-3 col-xs-12 filterGroup" data-filter-group="events">
 			<label for="eventsFilterDropdown">Events</label>
-			<select class="filter_dropdown" name="eventsFilterDropdown" id="eventsFilterDropdown">
+			<select class="filter_dropdown col-lg-12" name="eventsFilterDropdown" id="eventsFilterDropdown">
 				<option value="" selected="true">All</option>
 				<?php
 					foreach ($events_list as $event){
