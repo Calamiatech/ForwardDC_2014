@@ -25,7 +25,6 @@ if ($events && ! is_wp_error( $events )) {
 	}
 }
 ?>
-
 <article <?php post_class($post_classes); ?>>    
     <?php the_post_thumbnail('large',array('class'=>'img-responsive')); ?>
 	<h4 class="artistName"><?php the_title(); ?></h4>
