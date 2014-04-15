@@ -88,4 +88,40 @@ function fwddc_save_venue_meta_box_data( $post_id ) {
 }
 add_action( 'save_post', 'fwddc_save_venue_meta_box_data' );
 
+/**
+ * Admin Post Columns Config/Setup
+ */
+function set_custom_fwddc_venue_columns($columns) {
+    unset( $columns['date'] );
+    $columns['thumbnail'] = __( 'Photo', 'roots' );
+    $columns['title'] = __( 'Venue Name', 'roots' );
+    $columns['taxonomy-fwddc_events'] = __( 'Events', 'roots' );
+    $columns['taxonomy-fwddc_artists'] = __( 'Artists', 'roots' );
+
+    return $columns;
+}
+add_filter('manage_fwddc_venue_posts_columns', 'set_custom_fwddc_venue_columns');
+
+function fwddc_venue_custom_columns( $column, $post_id ) {
+    switch ( $column ) {
+        case 'thumbnail' :
+            if (has_post_thumbnail( $post_id )) {
+                echo get_the_post_thumbnail( $post_id, array(75,75), array() );
+            } else {
+                echo "<img src='http://fillmurray.com/75/75'>";
+            }
+            break;
+        default:
+            echo "<script>console.log($column);</script>";
+            break;
+    }
+}
+add_action( 'manage_fwddc_venue_posts_custom_column' , 'fwddc_venue_custom_columns', 10, 2 );
+
+function venue_posts_column_register_sortable( $columns ) {
+    $columns['title'] = 'title';
+    $columns['taxonomy-fwddc_event_year'] = 'taxonomy-fwddc_event_year';
+    return $columns;
+}
+add_filter( 'manage_edit-fwddc_venue_posts_sortable_columns', 'venue_posts_column_register_sortable' );
 
