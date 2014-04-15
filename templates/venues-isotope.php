@@ -3,17 +3,17 @@
 	
 	</div>
   <div class="row js-isotope"
-	id="artists-container" 
+	id="venues-container" 
     data-isotope-options='{ 
-		"itemSelector": ".artist", 
+		"itemSelector": ".venue", 
 		"masonry": { 
-			"columnWidth": ".artist", 
-			"gutter":0
+			"columnWidth": ".venue", 
+			"gutter":10
 		},
 		"getSortData": {
-			"artistName": ".artistName"
+			"venueName": ".venueName"
 		},
-		"sortBy":"artistName"
+		"sortBy":"venueName"
 	}'>
 <?php while (have_posts()) : the_post(); ?>
   <?php get_template_part('templates/venue', 'isotope'); ?>
