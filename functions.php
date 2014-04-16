@@ -18,4 +18,5 @@ require_once locate_template('/lib/widgets.php');         // Sidebars and widget
 require_once locate_template('/lib/scripts.php');         // Scripts and stylesheets
 require_once locate_template('/lib/meta-boxes.php');      // Metabox functions
 require_once locate_template('/lib/custom.php');          // Custom functions
+require_once locate_template('/lib/event_year.php')		  // Event Year Taxonomy Def. (probably need a better place to put this.)
 
