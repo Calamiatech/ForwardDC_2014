@@ -10,6 +10,5 @@
         ?>
       </nav>
     </div>
-    <?php include (TEMPLATEPATH . '/searchform.php'); ?>
   </div>
 </header>

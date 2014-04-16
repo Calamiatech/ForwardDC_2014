@@ -8,7 +8,7 @@
 		"itemSelector": ".sponsor", 
 		"masonry": { 
 			"columnWidth": ".sponsor", 
-			"gutter":10
+			"gutter":60
 		},
 		"getSortData": {
 			"sponsorName": ".sponsorName"

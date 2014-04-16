@@ -5,7 +5,12 @@
   <div class="row js-isotope"
 	id="venues-container" 
     data-isotope-options='{ 
-		"itemSelector": ".venue", 
+		"itemSelector": ".venue",
+		"layoutMode": "cellsByRow",
+  	"cellsByRow": {
+    "columnWidth": 200,
+    "rowHeight": 200
+  }, 
 		"masonry": { 
 			"columnWidth": ".venue", 
 			"gutter":10
