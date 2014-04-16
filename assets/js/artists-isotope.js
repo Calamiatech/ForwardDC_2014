@@ -25,12 +25,12 @@ jQuery(document).ready(function() {
             });
         });
 
-        jQuery('article.fwddc_artist').click(function() {
+        jQuery('article.isotope-ready').click(function() {
             jQuery(this).toggleClass("selected");
         });
 
         jQuery(window).resize(function() {
-            jQuery("article.fwddc_artist").each(function() {
+            jQuery("article.isotope-ready").each(function() {
                 var $this = jQuery(this);
                 $this.css({
                     "height": $this.width() + "px"

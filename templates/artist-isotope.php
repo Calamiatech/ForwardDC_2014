@@ -27,7 +27,7 @@ if ($events && ! is_wp_error( $events )) {
 $event_years = get_the_terms( $post->ID, 'fwddc_event_year' );
 if ( $event_years && ! is_wp_error( $event_years )) {
 	foreach ($event_years as $year) {
-		$post_classes[] = $year;
+		$post_classes[] = $year->name;
 	}
 }
 ?>
