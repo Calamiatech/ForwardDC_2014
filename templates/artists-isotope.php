@@ -16,7 +16,7 @@
 				<option value="" selected="true">All</option>
 				<?php
 					foreach ($genres_list as $genre){
-						$genre_safe_name = str_replace(' ', '_', $genre->name);
+						$genre_safe_name = preg_replace('/[^A-Za-z0-9]/', '_', $genre->name);
 						echo '<option value=".'.$genre_safe_name.'">'.$genre->name.'</option>';
 					}
 				?>
@@ -89,6 +89,7 @@
 		"getSortData": {
 			"artistName": ".artistName"
 		},
+		"filter":".2014",
 		"sortBy":"artistName"
 	}'>
 <?php while (have_posts()) : the_post(); ?>

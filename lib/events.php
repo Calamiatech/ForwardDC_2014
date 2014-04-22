@@ -35,9 +35,61 @@ add_action( 'init', 'create_fwddc_event_post_type' );
 /**
  * Events Meta Boxes
  *   we need:
- *     title, date, venue, cost, brownpapertickets
+ *     title, date, brownpapertickets, facebook event page, 
  */
+function add_events_meta_boxes( $post ) {
+    add_meta_box( 'fwddc_event_fb', __('Facebook Event ID', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'fb', 'prefix' => 'http://facebook.com/events/' ) );
+    add_meta_box( 'fwddc_event_bpt', __('BrownPaperTickets Link', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'bpt', 'prefix' => 'http://www.brownpapertickets.com/event/' ) );
+    add_meta_box( 'fwddc_event_date', __('Event Date', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'event_date', 'prefix' => '' ) );
+}
+add_action( 'add_meta_boxes', 'add_events_meta_boxes');
 
+function fwddc_event_meta( $post, $meta_name ) {
+    $name = $meta_name['args']['name'];
+    $action = 'fwddc_event_'.$name.'_meta_box';
+    $nonce_name = 'fwddc_event_'.$name.'_meta_box_nonce';
+    $input_name = 'fwddc_'.$name.'_url';
+    wp_nonce_field( $action, $nonce_name );
+
+    $url = get_post_meta( $post->ID, '_'.$input_name, TRUE );
+
+    echo '<label for="'.$input_name.'">'.$meta_name['args']['prefix'].'</label><input type="text" name="'.$input_name.'" id="'.$input_name.'" value="'.$url.'" style="width: 50%;" />';
+}
+
+// function fwddc_save_event_meta_box_data( $post_id ) { 
+
+//     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+//         return;
+//     }
+
+//     if ( ! current_user_can( 'edit_post', $post_id ) ) {
+//         return;
+//     } 
+
+//     $meta_boxes = array(
+//         'fb',
+//         'twitter',
+//         'soundcloud'
+//     );
+
+//     foreach ($meta_boxes as $box) {
+//         $action = 'fwddc_venue_'.$box.'_meta_box';
+//         $nonce = $action.'_nonce';
+ 
+//         if ( ! isset( $_POST[$nonce] ) ) {
+//             continue;
+//         }
+//         if ( ! wp_verify_nonce( $_POST[$nonce], $action ) ) {
+//             continue;
+//         }   
+//         if ( ! isset( $_POST['fwddc_'.$box.'_url'] ) ) {
+//             continue;
+//         }
+//         $meta_data = sanitize_text_field( $_POST['fwddc_'.$box.'_url'] );
+//         update_post_meta( $post_id, '_fwddc_'.$box.'_url', $meta_data );
+//     }
+// }
+// add_action( 'save_post', 'fwddc_save_venue_meta_box_data' );
 
 /**
  * Artists Taxonomy
@@ -122,3 +174,88 @@ function populate_fwddc_artists_taxonomy(){
 	}
 }
 add_action('admin_init','populate_fwddc_artists_taxonomy');
+
+
+/**
+ * Venues Taxonomy
+ */
+function register_fwddc_venues_taxonomy(){
+	$labels = array (
+        'name' 			=> _x( 'Venues', 'taxonomy general name', 'roots' ),
+        'singular_name' => _x( 'Venue', 'taxonomy singular name', 'roots' ),
+        'search_items' 	=> __( 'Search Venues', 'roots' ),
+        'all_items' 	=> __( 'All Venues', 'roots' ),
+        'edit_item' 	=> __( 'Edit Venue', 'roots'),
+        'update_item' 	=> __( 'Update Venue', 'roots'),
+        'add_new_item' 	=> __( 'Add New Venue', 'roots'),
+		'new_item_name' => __( 'New Venue', 'roots'),
+		'menu_name'		=> __( 'Venues', 'roots' ),
+    );
+	$args = array (
+     	'labels' => $labels,
+        'hierarchical' => false,
+        'separate_items_with_commas' => __('Separate venues with commas'),
+        'show_ui' => true,
+        'show_tagcloud' => false, 
+        'show_admin_column' => true,
+        'show_in_nav_menus' => false,
+        'query_var' => 'venue',
+        'rewrite' => array( 'slug' => 'venues' ),
+        'public'=>true,
+    );
+    $post_types = array(
+    	'fwddc_event',
+    	'fwddc_venue',
+    );
+	register_taxonomy( 'fwddc_venues', $post_types, $args );
+}
+add_action('init', 'register_fwddc_venues_taxonomy');
+
+/**
+ * Populate the venues taxonomy with existing venues' names
+ * so that they can be tagged to the event.
+ **/
+function populate_fwddc_venues_taxonomy(){
+	/**
+	 * The WordPress Query class.
+	 * @link http://codex.wordpress.org/Function_Reference/WP_Query
+	 *
+	 */
+	$q_args = array(
+		//Type & Status Parameters
+		'post_status' => 'publish',
+		'post_type' => array(
+			'fwddc_venue',
+			),
+		//Order & Orderby Parameters
+		'order'               => 'ASC',
+		'orderby'             => 'name',
+		'ignore_sticky_posts' => false,
+
+		//Pagination Parameters
+		'posts_per_page'         => -1,
+		'nopaging'               => true,
+
+		//Permission Parameters -
+		'perm' => 'readable',
+		
+		//Parameters relating to caching
+		'cache_results'          => true,
+		'update_post_term_cache' => true,
+		'update_post_meta_cache' => true,
+	);
+	
+	$query = new WP_Query( $q_args );
+	if ($query->have_posts()){
+		$args = array();
+		while ($query->have_posts()){
+			$query->the_post();
+			$term = get_the_title();
+			if (!term_exists( $term, 'fwddc_venues' )) {
+				wp_insert_term( $term, 'fwddc_venues', $args );
+			}
+		}
+		wp_reset_postdata();
+	}
+}
+add_action('admin_init','populate_fwddc_venues_taxonomy');

@@ -58,8 +58,8 @@ function roots_display_sidebar() {
      */
     array(
       'is_404',
-      'is_front_page',
-      array('is_page','artists')
+      //'is_front_page',
+      //array('is_page','artists')
     ),
     /**
      * Page template checks (via is_page_template())

@@ -13,6 +13,7 @@
 		"getSortData": {
 			"sponsorName": ".sponsorName"
 		},
+		"filter":".2014",
 		"sortBy":"sponsorName"
 	}'>
 <?php while (have_posts()) : the_post(); ?>

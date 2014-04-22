@@ -1,6 +1,31 @@
 <section class="container-fluid">
 	<div id="filters" class="row">
-	
+	<?php
+		/* EVENT YEAR FILTER */ 
+			$event_years_args = array(
+				'orderby'	=> 'name',
+				'order'		=> 'DESC',
+				'hide_empty'=> false,
+				);
+			$event_years_list = get_terms( 'fwddc_event_year', $event_years_args );
+			// Only show this filter if everything comes back AOK.
+			if ( $event_years_list && ! is_wp_error( $event_years_list )) { 
+		?>
+		<div class="eventYearsFilter col-lg-3 col-xs-12 filterGroup" data-filter-group="event_years">
+			<label for="event_years_FilterDropdown">Years</label>
+			<select class="filter_dropdown col-lg-12" name="event_years_FilterDropdown" id="event_years_FilterDropdown">
+				<option value="" selected="true">All</option>
+				<?php
+					foreach ($event_years_list as $event_year){
+						$event_year_safe_name = preg_replace('/[^A-Za-z0-9]/', '', $event_year->name);
+						echo '<option value=".'.$event_year_safe_name.'">'.$event_year->name.'</option>';
+					}
+				?>
+			</select>
+		</div>
+		<?php
+			}  /* END EVENT YEARS FILTER */
+		?>
 	</div>
   <div class="row js-isotope"
 	id="venues-container" 
@@ -18,6 +43,7 @@
 		"getSortData": {
 			"venueName": ".venueName"
 		},
+		"filter":".2014",
 		"sortBy":"venueName"
 	}'>
 <?php while (have_posts()) : the_post(); ?>

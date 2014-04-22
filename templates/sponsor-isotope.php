@@ -17,6 +17,13 @@ $post_classes = array(
 // 		$post_classes[] = preg_replace('/[^A-Za-z0-9]/', '', $event->name);
 // 	}
 // }
+
+$event_years = get_the_terms( $post->ID, 'fwddc_event_year' );
+if ( $event_years && ! is_wp_error( $event_years )) {
+	foreach ($event_years as $year) {
+		$post_classes[] = $year->name;
+	}
+}
 ?>
 <article <?php post_class($post_classes); ?>>    
     <?php the_post_thumbnail('large',array('class'=>'img-responsive')); ?>
