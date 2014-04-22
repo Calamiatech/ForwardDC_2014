@@ -8,6 +8,8 @@
       <a class="navbar-brand" href="<?php echo home_url(); ?>/">
         <span class="text-hide"><?php bloginfo('name'); ?></span>
         <img src="<?php bloginfo('template_directory') ?>/assets/img/FORWARD_2014_logo_small-02.svg" height="45px" alt=""></a>
+      <a class="navbar-brand" href="http://forward2014.brownpapertickets.com">
+        <img src="<?php bloginfo('template_directory') ?>/assets/img/dates.gif" height="45px" alt="May 14 - 18, 2014"></a>
     </div>
 
     <nav class="collapse navbar-collapse small navbar-right" role="navigation">
@@ -19,4 +21,4 @@
     </nav>
   </div>
 </header>
-<img src="/wp-content/themes/roots/assets/img/top_banner.png" class="img-responsive hidden-md hidden-sm hidden-xs" id="topbar">
+<img src="/wp-content/themes/roots/assets/img/top_banner.png" class="img-responsive hidden-sm hidden-xs" id="topbar">
