@@ -5,7 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?php wp_title('|', true, 'right'); ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="shortcut icon" href="/wp-content/themes/roots/assets/ico/favicon.png">
+  
   <?php wp_head(); ?>
 
   <link rel="alternate" type="application/rss+xml" title="<?php echo get_bloginfo('name'); ?> Feed" href="<?php echo esc_url(get_feed_link()); ?>">
