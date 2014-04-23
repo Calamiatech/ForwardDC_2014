@@ -1,6 +1,8 @@
-<header class="jumbotron container-fluid hero hidden-sm hidden-xs">
+
+<header class="jumbotron container-fluid hero ">
 	<section class="row">
-		<div class="col-lg-7" id="hero_container">
+		<div class="alert alert-danger col-lg-12"><a class="btn-lg" href="http://forward2014.bpt.me">Get Forward 2014 Festival Passes Now!</a></div>
+		<div class="col-lg-7 hidden-md hidden-sm hidden-xs" id="hero_container">
 			<img src="/wp-content/themes/roots/assets/img/perspective_ball.png" id="p_ball" class="img_responsive" class="animatable">
 			<img src="/wp-content/themes/roots/assets/img/red_arrow_spikes_in_formation.png" id="spike_formation" class="animatable">
 		</div>
