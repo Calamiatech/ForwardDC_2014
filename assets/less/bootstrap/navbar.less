@@ -20,6 +20,10 @@
   @media (min-width: @grid-float-breakpoint) {
     border-radius: @navbar-border-radius;
   }
+
+  @media (min-width: @screen-lg-desktop) {
+    min-height: @navbar-height * 2;
+  }
 }
 
 
@@ -140,6 +144,13 @@
 .navbar-fixed-top {
   top: 0;
   border-width: 0 0 1px;
+}
+.navbar-fixed-top-responsive {
+  @media (max-width: @grid-float-breakpoint-max) {
+    position: relative;
+    top: 0px;
+    padding-top: 0px;
+  }
 }
 .navbar-fixed-bottom {
   bottom: 0;
@@ -423,6 +434,7 @@
 
   .navbar-toggle {
     border-color: @navbar-default-toggle-border-color;
+    color: @navbar-default-link-color;
     &:hover,
     &:focus {
       background-color: @navbar-default-toggle-hover-bg;

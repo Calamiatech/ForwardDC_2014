@@ -1,5 +1,5 @@
 <?php get_template_part('templates/head'); ?>
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?><?php if ( is_front_page() ) echo 'data-type="background" data-speed="10"'; ?>>
 
   <!--[if lt IE 8]>
     <div class="alert alert-warning">

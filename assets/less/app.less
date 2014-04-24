@@ -13,9 +13,20 @@
    ========================================================================== */
 
 body { 
-   padding-top: @navbar-height - 10px;
+   padding-top: @navbar-height * 2;
    padding-bottom: @navbar-height;
-
+   &.home {
+      background: 
+         url("/wp-content/themes/roots/assets/img/gradient_lines_bg.png")
+         repeat-y
+         center center;
+      background-size: cover;
+      background-attachment: fixed;
+   }
+   
+   @media (max-width: @grid-float-breakpoint-max) {
+      padding-top: 0px;
+   }
    h3, h4, h5, h6, .h3, .h4, .h5, .h6 {
       font-family: @font-family-serif;
    }
@@ -32,17 +43,28 @@ select, option {
    NavBar
    ========================================================================== */
 body.admin-bar .navbar {
-      top: 28px;
+   top: 28px;
+   @media (max-width: @grid-float-breakpoint-max) {
+      top: 0px;
+   }
 }
 .navbar-brand img {
    position: relative;
    top: -12px;
+   height: 65px;
+   @media (max-width: @grid-float-breakpoint-max) {
+      height: 55px;
+   }
+   @media (min-width: @screen-lg-min) {
+      top: 0px;
+   }
 }
 
 #topbar {
    position: fixed;
    top: -10%;
    width: 100%;
+   z-index: @zindex-navbar / 2;
 }
 
 #botbar {
@@ -55,26 +77,38 @@ body.admin-bar .navbar {
 #botbar {}
 
 /* ==========================================================================
-   Header
+   Hero
    ========================================================================== */
 
 .banner { }
 
 .hero { 
-   background: 
-      url("/wp-content/themes/roots/assets/img/gradient_lines_bg.png")
-      no-repeat
-      center center;
-   background-size: cover;
+   @hero-padding-top: 145px;
+   @hero-top: @navbar-height*-2;
+   padding-top: @hero-padding-top;
+   position: relative;
+   top: @hero-top;
+   margin-bottom: @hero-top;
+   background: transparent;
+   @media (max-width: @grid-float-breakpoint-max) {
+      @hero-top-sm: -108px;
+      top: @hero-top-sm;
+      margin-bottom: @hero-top-sm;
+   }
 }
 
-#hero_container:before {
-   content: "";
-   display: block;
-   height: 100px;
-}
-#hero_container img {
-   // position: absolute;
+#hero_container {
+   top: -110px;
+
+   &:before {
+      content: "";
+      display: block;
+      height: 100px;
+   }
+
+   img {
+      // position: absolute;
+   }
 }
 
 #p_ball {
@@ -87,7 +121,7 @@ body.admin-bar .navbar {
 #spike_formation {
    top: 27%;
    left: 33%;
-   z-index: @animate-z + 10;
+   z-index: @zindex-navbar / 2 - 1;
 }
 
 /* ==========================================================================
@@ -110,6 +144,10 @@ body.admin-bar .navbar {
    .home .navbar {
       margin-bottom: 0px;
 
+   }
+
+   .frontpage {
+      z-index: @zindex-navbar / 2 + 10;
    }
 
 
