@@ -30,14 +30,9 @@
   <div class="row js-isotope"
 	id="venues-container" 
     data-isotope-options='{ 
-		"itemSelector": ".venue",
-		"layoutMode": "cellsByRow",
-  	"cellsByRow": {
-    "columnWidth": 200,
-    "rowHeight": 200
-  }, 
+		"itemSelector": ".venue", 
 		"masonry": { 
-			"columnWidth": ".venue", 
+			"columnWidth": 180, 
 			"gutter":10
 		},
 		"getSortData": {
