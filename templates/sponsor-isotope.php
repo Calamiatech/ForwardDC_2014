@@ -25,6 +25,21 @@ if ( $event_years && ! is_wp_error( $event_years )) {
 	}
 }
 ?>
-<article <?php post_class($post_classes); ?>>    
+<article <?php post_class($post_classes); ?>>   
+	<?php if ($sponsor_url = get_post_meta($post->ID, '_fwddc_sponsor_url', TRUE)): ?>
+	<?php
+	// in case scheme relative URI is passed, e.g., //www.google.com/
+	$sponsor_url = trim($sponsor_url, '/');
+
+	// If scheme not included, prepend it
+	if (!preg_match('#^http(s)?://#', $sponsor_url)) {
+	    $sponsor_url = 'http://' . $sponsor_url;
+	}
+	?>
+	<a href="<?php echo $sponsor_url ?>" target="_blank">
+	<?php endif ?>
     <?php the_post_thumbnail('large',array('class'=>'img-responsive')); ?>
+	<?php if ($sponsor_url) : ?>
+	</a>
+	<?php endif ?>    
 </article>

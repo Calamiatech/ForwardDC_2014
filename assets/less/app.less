@@ -97,8 +97,9 @@ body.admin-bar .navbar {
    }
 }
 
-#hero_container {
-   top: -110px;
+.home #hero_container {
+   top: 110px;
+   position: absolute;
 
    &:before {
       content: "";
@@ -129,6 +130,9 @@ body.admin-bar .navbar {
    ========================================================================== */
 
 .content { }
+.main, .sidebar {
+   z-index: @zindex-navbar / 2 + 20;
+}
 
 /* ==========================================================================
    Square content styles

@@ -32,5 +32,20 @@ if ( $event_years && ! is_wp_error( $event_years )) {
 }
 ?>
 <article <?php post_class($post_classes); ?>>    
-    <?php the_post_thumbnail('large',array('class'=>'img-responsive')); ?>
+	<?php if ($venue_url = get_post_meta($post->ID, '_fwddc_url', TRUE)): ?>
+	<?php
+	// in case scheme relative URI is passed, e.g., //www.google.com/
+	$venue_url = trim($venue_url, '/');
+
+	// If scheme not included, prepend it
+	if (!preg_match('#^http(s)?://#', $venue_url)) {
+	    $venue_url = 'http://' . $venue_url;
+	}
+	?>
+	<a href="<?php echo $venue_url ?>" target="_blank">
+	<?php endif ?>
+	    <?php the_post_thumbnail('large',array('class'=>'img-responsive')); ?>
+	<?php if ($venue_url) : ?>
+	</a>
+	<?php endif ?>
 </article>

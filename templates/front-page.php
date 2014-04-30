@@ -11,17 +11,19 @@
 
 </section>
 
-<section class="container pullup" role="document">
+<section class="container" role="document">
 	<div class="frontpage col-md-12 col-lg-9 col-xl-10 col-lg-offset-3 col-md-offset-0 col-sm-offset-0">
 		<?php
- $postslist = get_posts('numberposts=10');
- foreach ($postslist as $post) :
-    setup_postdata($post);
- ?>
-        <div class="post"><h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-<?php the_content() ?>
-<hr />
-</div>
-<?php endforeach ?>
+		$postslist = get_posts('numberposts=10');
+		foreach ($postslist as $post) :
+		    setup_postdata($post);
+		?>
+        <div class="post">
+        	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+			<?php the_content() ?>
+
+			<hr />
+		</div>
+		<?php endforeach ?>
 	</div>
 </section>

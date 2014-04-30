@@ -26,7 +26,7 @@
     <nav class="collapse navbar-collapse small navbar-right" role="navigation" id="navigator">
       <?php
         if (has_nav_menu('primary_navigation')) :
-          wp_nav_menu(array('theme_location' => 'primary_navigation', 'menu_class' => 'nav navbar-nav tk-changeling-neo'));
+          wp_nav_menu(array('theme_location' => 'primary_navigation', 'menu_class' => 'nav navbar-nav tk-futura-pt'));
         endif;
       ?>
     </nav>
