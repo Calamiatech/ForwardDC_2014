@@ -65,11 +65,12 @@
 		<div class="eventYearsFilter col-lg-3 col-xs-12 filterGroup" data-filter-group="event_years">
 			<label for="event_years_FilterDropdown">Years</label>
 			<select class="filter_dropdown col-lg-12" name="event_years_FilterDropdown" id="event_years_FilterDropdown">
-				<option value="" selected="true">All</option>
+				<option value="">All</option>
 				<?php
 					foreach ($event_years_list as $event_year){
 						$event_year_safe_name = preg_replace('/[^A-Za-z0-9]/', '', $event_year->name);
-						echo '<option value=".'.$event_year_safe_name.'">'.$event_year->name.'</option>';
+						$selected = $event_year_safe_name == date('Y') ? ' selected="true"' : '';
+						echo '<option value=".'.$event_year_safe_name.'"'.$selected.'>'.$event_year->name.'</option>';
 					}
 				?>
 			</select>
@@ -89,7 +90,7 @@
 		"getSortData": {
 			"artistName": ".artistName"
 		},
-		"filter":".2014",
+		"filter":".<?php echo date('Y'); ?>",
 		"sortBy":"artistName"
 	}'>
 <?php while (have_posts()) : the_post(); ?>
