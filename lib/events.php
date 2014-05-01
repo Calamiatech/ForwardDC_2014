@@ -40,7 +40,7 @@ add_action( 'init', 'create_fwddc_event_post_type' );
 function add_events_meta_boxes( $post ) {
     add_meta_box( 'fwddc_event_fb', __('Facebook Event ID', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'fb', 'prefix' => 'http://facebook.com/events/' ) );
     add_meta_box( 'fwddc_event_tix', __('Ticket Link', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'tix', 'prefix' => '' ) );
-    add_meta_box( 'fwddc_event_date', __('Event Date', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'event_date', 'prefix' => '' ) );
+    add_meta_box( 'fwddc_event_date', __('Event Date', 'roots'), 'fwddc_event_date_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'event_date', 'prefix' => '' ) );
 }
 add_action( 'add_meta_boxes', 'add_events_meta_boxes');
 
@@ -54,6 +54,18 @@ function fwddc_event_meta( $post, $meta_args ) {
 
     $val = get_post_meta( $post->ID, '_'.$input_name, TRUE );
 
+    echo '<label for="'.$input_name.'">'.$meta_args['args']['prefix'].'</label><input type="text" name="'.$input_name.'" id="'.$input_name.'" value="'.$val.'" style="width: 50%;" />';
+}
+
+function fwddc_event_date_meta( $post, $meta_args ) {
+    $name = $meta_args['args']['name'];
+    $meta_prefix = 'fwddc_event_';
+    $action = $meta_prefix.$name.'_meta_box';
+    $nonce_name = $meta_prefix.$name.'_meta_box_nonce';
+    $input_name = $meta_prefix.$name;
+    wp_nonce_field( $action, $nonce_name );
+
+    $val = get_post_meta( $post->ID, '_'.$input_name, TRUE );
     echo '<label for="'.$input_name.'">'.$meta_args['args']['prefix'].'</label><input type="text" name="'.$input_name.'" id="'.$input_name.'" value="'.$val.'" style="width: 50%;" />';
 }
 
