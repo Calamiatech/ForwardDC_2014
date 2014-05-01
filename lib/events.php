@@ -39,57 +39,61 @@ add_action( 'init', 'create_fwddc_event_post_type' );
  */
 function add_events_meta_boxes( $post ) {
     add_meta_box( 'fwddc_event_fb', __('Facebook Event ID', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'fb', 'prefix' => 'http://facebook.com/events/' ) );
-    add_meta_box( 'fwddc_event_bpt', __('Ticket Link', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'bpt', 'prefix' => '' ) );
+    add_meta_box( 'fwddc_event_tix', __('Ticket Link', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'tix', 'prefix' => '' ) );
     add_meta_box( 'fwddc_event_date', __('Event Date', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'event_date', 'prefix' => '' ) );
 }
 add_action( 'add_meta_boxes', 'add_events_meta_boxes');
 
-function fwddc_event_meta( $post, $meta_name ) {
-    $name = $meta_name['args']['name'];
-    $action = 'fwddc_event_'.$name.'_meta_box';
-    $nonce_name = 'fwddc_event_'.$name.'_meta_box_nonce';
-    $input_name = 'fwddc_'.$name.'_url';
+function fwddc_event_meta( $post, $meta_args ) {
+    $name = $meta_args['args']['name'];
+    $meta_prefix = 'fwddc_event_';
+    $action = $meta_prefix.$name.'_meta_box';
+    $nonce_name = $meta_prefix.$name.'_meta_box_nonce';
+    $input_name = $meta_prefix.$name;
     wp_nonce_field( $action, $nonce_name );
 
     $url = get_post_meta( $post->ID, '_'.$input_name, TRUE );
 
-    echo '<label for="'.$input_name.'">'.$meta_name['args']['prefix'].'</label><input type="text" name="'.$input_name.'" id="'.$input_name.'" value="'.$url.'" style="width: 50%;" />';
+    echo '<label for="'.$input_name.'">'.$meta_args['args']['prefix'].'</label><input type="text" name="'.$input_name.'" id="'.$input_name.'" value="'.$url.'" style="width: 50%;" />';
 }
 
-// function fwddc_save_event_meta_box_data( $post_id ) { 
+function fwddc_save_event_meta_box_data( $post_id ) { 
 
-//     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-//         return;
-//     }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
 
-//     if ( ! current_user_can( 'edit_post', $post_id ) ) {
-//         return;
-//     } 
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    } 
 
-//     $meta_boxes = array(
-//         'fb',
-//         'twitter',
-//         'soundcloud'
-//     );
+    $meta_boxes = array(
+        'fb',
+        'tix',
+        'date'
+    );
+    $meta_prefix = 'fwddc_event_';
 
-//     foreach ($meta_boxes as $box) {
-//         $action = 'fwddc_venue_'.$box.'_meta_box';
-//         $nonce = $action.'_nonce';
+    foreach ($meta_boxes as $box) {
+    	$box_name = $meta_prefix.$box;
+    	$meta_name = "_".$box_name;
+        $action = $box_name.'_meta_box';
+        $nonce = $action.'_nonce';
  
-//         if ( ! isset( $_POST[$nonce] ) ) {
-//             continue;
-//         }
-//         if ( ! wp_verify_nonce( $_POST[$nonce], $action ) ) {
-//             continue;
-//         }   
-//         if ( ! isset( $_POST['fwddc_'.$box.'_url'] ) ) {
-//             continue;
-//         }
-//         $meta_data = sanitize_text_field( $_POST['fwddc_'.$box.'_url'] );
-//         update_post_meta( $post_id, '_fwddc_'.$box.'_url', $meta_data );
-//     }
-// }
-// add_action( 'save_post', 'fwddc_save_venue_meta_box_data' );
+        if ( ! isset( $_POST[$nonce] ) ) {
+            continue;
+        }
+        if ( ! wp_verify_nonce( $_POST[$nonce], $action ) ) {
+            continue;
+        }   
+        if ( ! isset( $_POST[$box_name] ) ) {
+            continue;
+        }
+        $meta_data = sanitize_text_field( $_POST[$box_name] );
+        update_post_meta( $post_id, $meta_name, $meta_data );
+    }
+}
+add_action( 'save_post', 'fwddc_save_event_meta_box_data' );
 
 /**
  * Artists Taxonomy
