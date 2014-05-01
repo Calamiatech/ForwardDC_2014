@@ -39,7 +39,7 @@ add_action( 'init', 'create_fwddc_event_post_type' );
  */
 function add_events_meta_boxes( $post ) {
     add_meta_box( 'fwddc_event_fb', __('Facebook Event ID', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'fb', 'prefix' => 'http://facebook.com/events/' ) );
-    add_meta_box( 'fwddc_event_bpt', __('BrownPaperTickets Link', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'bpt', 'prefix' => 'http://www.brownpapertickets.com/event/' ) );
+    add_meta_box( 'fwddc_event_bpt', __('Ticket Link', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'bpt', 'prefix' => '' ) );
     add_meta_box( 'fwddc_event_date', __('Event Date', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'event_date', 'prefix' => '' ) );
 }
 add_action( 'add_meta_boxes', 'add_events_meta_boxes');
