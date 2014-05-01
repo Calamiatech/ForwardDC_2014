@@ -1,7 +1,7 @@
 
 <section class="jumbotron container-fluid hero ">
 	<div class="row">
-		<div class="alert alert-danger col-lg-12 hidden"><a class="btn-lg" href="http://forward2014.bpt.me"><b>Tier 1 SOLD OUT</b> Get Forward 2014 Festival Passes Now!</a></div>
+		<div class="alert alert-danger col-lg-12"><a class="btn-lg" href="http://forward2014.bpt.me"><b>Tier 1 SOLD OUT</b> Get Forward 2014 Festival Passes Now!</a></div>
 
 		<div class="col-lg-7 hidden-md hidden-sm hidden-xs" id="hero_container" data-speed='2'>
 			<img src="/wp-content/themes/roots/assets/img/perspective_ball.png" id="p_ball" class="img_responsive" class="animatable">
