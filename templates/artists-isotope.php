@@ -65,7 +65,7 @@
 		<div class="eventYearsFilter col-lg-3 col-xs-12 filterGroup" data-filter-group="event_years">
 			<label for="event_years_FilterDropdown">Years</label>
 			<select class="filter_dropdown col-lg-12" name="event_years_FilterDropdown" id="event_years_FilterDropdown">
-				<option value="" selected="true">All</option>
+				<option value="">All</option>
 				<?php
 					foreach ($event_years_list as $event_year){
 						$event_year_safe_name = preg_replace('/[^A-Za-z0-9]/', '', $event_year->name);
