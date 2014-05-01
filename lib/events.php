@@ -52,9 +52,9 @@ function fwddc_event_meta( $post, $meta_args ) {
     $input_name = $meta_prefix.$name;
     wp_nonce_field( $action, $nonce_name );
 
-    $url = get_post_meta( $post->ID, '_'.$input_name, TRUE );
+    $val = get_post_meta( $post->ID, '_'.$input_name, TRUE );
 
-    echo '<label for="'.$input_name.'">'.$meta_args['args']['prefix'].'</label><input type="text" name="'.$input_name.'" id="'.$input_name.'" value="'.$url.'" style="width: 50%;" />';
+    echo '<label for="'.$input_name.'">'.$meta_args['args']['prefix'].'</label><input type="text" name="'.$input_name.'" id="'.$input_name.'" value="'.$val.'" style="width: 50%;" />';
 }
 
 function fwddc_save_event_meta_box_data( $post_id ) { 
@@ -70,7 +70,7 @@ function fwddc_save_event_meta_box_data( $post_id ) {
     $meta_boxes = array(
         'fb',
         'tix',
-        'date'
+        'event_date'
     );
     $meta_prefix = 'fwddc_event_';
 
