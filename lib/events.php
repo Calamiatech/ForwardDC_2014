@@ -60,13 +60,26 @@ function fwddc_event_meta( $post, $meta_args ) {
 function fwddc_event_date_meta( $post, $meta_args ) {
     $name = $meta_args['args']['name'];
     $meta_prefix = 'fwddc_event_';
-    $action = $meta_prefix.$name.'_meta_box';
-    $nonce_name = $meta_prefix.$name.'_meta_box_nonce';
     $input_name = $meta_prefix.$name;
+    $action = $input_name.'_meta_box';
+    $nonce_name = $input_name.'_meta_box_nonce';
     wp_nonce_field( $action, $nonce_name );
+    $start_name = $input_name."_startdate";
+    $end_name = $input_name."_enddate";
 
-    $val = get_post_meta( $post->ID, '_'.$input_name, TRUE );
-    echo '<label for="'.$input_name.'">'.$meta_args['args']['prefix'].'</label><input type="text" name="'.$input_name.'" id="'.$input_name.'" value="'.$val.'" style="width: 50%;" />';
+    $val = get_post_meta( $post->ID, '_'.$start_name, TRUE );
+    echo '<label for="'.$start_name.'">Start Date</label>';
+    echo '<div class="input-append date" id="dpYears" data-provide="datepicker" data-date-format="dd-mm-yyyy" data-date-start-view="2" data-date-clear-btn="true">';
+    echo '  <input type="text" name="'.$start_name.'" id="'.$start_name.'" value="'.$val.'" class="" readonly="" style="width: 25%;">';
+    echo '  <span class="add-on"><i class="icon-calendar"></i></span></div>';
+
+	$val = get_post_meta( $post->ID, '_'.$end_name, TRUE );
+    echo '<label for="'.$end_name.'">End Date (optional)</label>';
+    echo '<div class="input-append date" id="enddpYears" data-provide="datepicker" data-date-format="dd-mm-yyyy" data-date-start-view="2" data-date-clear-btn="true">';
+    echo '  <input type="text" name="'.$end_name.'" id="'.$end_name.'" value="'.$val.'" class="datepicker" style="width: 25%;" readonly="">';
+    echo '  <span class="add-on"><i class="icon-calendar"></i></span></div>';
+
+    
 }
 
 function fwddc_save_event_meta_box_data( $post_id ) { 
@@ -92,17 +105,26 @@ function fwddc_save_event_meta_box_data( $post_id ) {
         $action = $box_name.'_meta_box';
         $nonce = $action.'_nonce';
  
-        if ( ! isset( $_POST[$nonce] ) ) {
+        if ( ( ! isset( $_POST[$nonce] ) ) || 
+        	 ( ! wp_verify_nonce( $_POST[$nonce], $action ) ) ||
+        	 ( ! isset( $_POST[$box_name] ) ) )
+        {
             continue;
         }
-        if ( ! wp_verify_nonce( $_POST[$nonce], $action ) ) {
-            continue;
-        }   
-        if ( ! isset( $_POST[$box_name] ) ) {
-            continue;
+        switch($box) {
+        	case 'event_date':
+        		$attrs = array("_startdate", "_enddate");
+        		foreach ($attrs as $attr) {
+        			$box_name = $box_name.$attr;
+			        $meta_data = sanitize_text_field( $_POST[$box_name] );
+			        update_post_meta( $post_id, $meta_name, $meta_data );
+        		}
+        		break;
+        	default:
+		        $meta_data = sanitize_text_field( $_POST[$box_name] );
+		        update_post_meta( $post_id, $meta_name, $meta_data );
+        		break;
         }
-        $meta_data = sanitize_text_field( $_POST[$box_name] );
-        update_post_meta( $post_id, $meta_name, $meta_data );
     }
 }
 add_action( 'save_post', 'fwddc_save_event_meta_box_data' );

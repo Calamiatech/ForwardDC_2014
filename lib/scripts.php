@@ -56,6 +56,15 @@ function roots_scripts() {
 }
 add_action('wp_enqueue_scripts', 'roots_scripts', 100);
 
+function roots_admin_scripts() {
+  wp_register_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js', array(), null, false);
+  add_filter('script_loader_src', 'roots_jquery_local_fallback', 10, 2);
+
+  wp_enqueue_script( 'datepicker', get_template_directory_uri().'/assets/js/plugins/bootstrap/datepicker.js', array('jquery'), '', FALSE );
+
+  wp_enqueue_style( 'datepicker', get_template_directory_uri().'/assets/css/datepicker.css' );
+}
+add_action('admin_enqueue_scripts', 'roots_admin_scripts');
 
 function roots_typekit_script(){ ?>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
