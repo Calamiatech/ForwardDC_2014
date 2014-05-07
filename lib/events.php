@@ -40,7 +40,8 @@ add_action( 'init', 'create_fwddc_event_post_type' );
 function add_events_meta_boxes( $post ) {
     add_meta_box( 'fwddc_event_fb', __('Facebook Event ID', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'fb', 'prefix' => 'http://facebook.com/events/' ) );
     add_meta_box( 'fwddc_event_tix', __('Ticket Link', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'tix', 'prefix' => '' ) );
-    add_meta_box( 'fwddc_event_date', __('Event Date', 'roots'), 'fwddc_event_date_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'event_date', 'prefix' => '' ) );
+    add_meta_box( 'fwddc_event_date_startdate', __('Event Date', 'roots'), 'fwddc_event_date_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'event_date_startdate', 'prefix' => 'Start' ) );
+    add_meta_box( 'fwddc_event_date_enddate', __('Event Date', 'roots'), 'fwddc_event_date_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'event_date_enddate', 'prefix' => 'End' ) );
 }
 add_action( 'add_meta_boxes', 'add_events_meta_boxes');
 
@@ -64,21 +65,12 @@ function fwddc_event_date_meta( $post, $meta_args ) {
     $action = $input_name.'_meta_box';
     $nonce_name = $input_name.'_meta_box_nonce';
     wp_nonce_field( $action, $nonce_name );
-    $start_name = $input_name."_startdate";
-    $end_name = $input_name."_enddate";
 
-    $val = get_post_meta( $post->ID, '_'.$start_name, TRUE );
-    echo '<label for="'.$start_name.'">Start Date</label>';
-    echo '<div class="input-append date" id="dpYears" data-provide="datepicker" data-date-format="dd-mm-yyyy" data-date-start-view="2" data-date-clear-btn="true">';
-    echo '  <input type="text" name="'.$start_name.'" id="'.$start_name.'" value="'.$val.'" class="" readonly="" style="width: 25%;">';
+    $val = get_post_meta( $post->ID, '_'.$input_name, TRUE );
+    echo '<label for="'.$input_name.'">'.$meta_args['args']['prefix'].' Date</label>';
+    echo '<div class="input-append date" id="'.$input_name.'dpYears" data-provide="datepicker" data-date-format="mm-dd-yyyy" data-date-start-view="2" data-date-clear-btn="true">';
+    echo '  <input type="text" name="'.$input_name.'" id="'.$input_name.'" value="'.$val.'" class="" readonly="" style="width: 25%;">';
     echo '  <span class="add-on"><i class="icon-calendar"></i></span></div>';
-
-	$val = get_post_meta( $post->ID, '_'.$end_name, TRUE );
-    echo '<label for="'.$end_name.'">End Date (optional)</label>';
-    echo '<div class="input-append date" id="enddpYears" data-provide="datepicker" data-date-format="dd-mm-yyyy" data-date-start-view="2" data-date-clear-btn="true">';
-    echo '  <input type="text" name="'.$end_name.'" id="'.$end_name.'" value="'.$val.'" class="datepicker" style="width: 25%;" readonly="">';
-    echo '  <span class="add-on"><i class="icon-calendar"></i></span></div>';
-
     
 }
 
@@ -95,7 +87,8 @@ function fwddc_save_event_meta_box_data( $post_id ) {
     $meta_boxes = array(
         'fb',
         'tix',
-        'event_date'
+        'event_date_startdate',
+        'event_date_enddate'
     );
     $meta_prefix = 'fwddc_event_';
 
@@ -111,20 +104,8 @@ function fwddc_save_event_meta_box_data( $post_id ) {
         {
             continue;
         }
-        switch($box) {
-        	case 'event_date':
-        		$attrs = array("_startdate", "_enddate");
-        		foreach ($attrs as $attr) {
-        			$box_name = $box_name.$attr;
-			        $meta_data = sanitize_text_field( $_POST[$box_name] );
-			        update_post_meta( $post_id, $meta_name, $meta_data );
-        		}
-        		break;
-        	default:
-		        $meta_data = sanitize_text_field( $_POST[$box_name] );
-		        update_post_meta( $post_id, $meta_name, $meta_data );
-        		break;
-        }
+        $meta_data = sanitize_text_field( $_POST[$box_name] );
+        update_post_meta( $post_id, $meta_name, $meta_data );
     }
 }
 add_action( 'save_post', 'fwddc_save_event_meta_box_data' );

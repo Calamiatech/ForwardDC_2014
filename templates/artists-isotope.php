@@ -41,7 +41,7 @@
 			<select class="filter_dropdown col-lg-12" name="eventsFilterDropdown" id="eventsFilterDropdown">
 				<option value="" selected="true">All</option>
 				<?php
-					foreach ($events_list as$event){
+					foreach ($events_list as $event){
 						$event_safe_name = preg_replace('/[^A-Za-z0-9]/', '', $event->name);
 						echo '<option value=".'.$event_safe_name.'">'.$event->name.'</option>';
 					}

@@ -66,6 +66,11 @@
             init: function() {
                 // JavaScript to be fired on the about us page
             }
+        },
+        fwddc_events: {
+            init: function() {
+                console.log("This worked");
+            }
         }
     };
 
