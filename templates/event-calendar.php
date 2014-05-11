@@ -19,7 +19,7 @@ $post_classes = array(
 
 $event_date = get_post_meta( $post->ID, '_fwddc_event_event_date_startdate', TRUE );
 $_event_date = 0;
-$past_event = FALSE;
+$past_event = TRUE;
 $datecode = 999999999;
 
 if ((!empty($event_date)) && (! is_wp_error( $event_date ))) {
@@ -29,7 +29,7 @@ if ((!empty($event_date)) && (! is_wp_error( $event_date ))) {
 	$datediff = $d->d;
 	$datecode = $_event_date->format('Ymd');
 
-	if ( $_event_date > new DateTime() ) {
+	if ( $past_event = $_event_date > new DateTime() ) {
 	// Event is in the future...
 		$post_classes[] = "upcoming";
 
@@ -59,7 +59,6 @@ if ((!empty($event_date)) && (! is_wp_error( $event_date ))) {
 	} 
 	else {
 	// Event is in the past...
-		$past_event = TRUE;
 		$datecode = "9".$datecode;
 		$post_classes[] = "past_event";
 		$post_classes = array_replace( 
