@@ -40,6 +40,7 @@ add_action( 'init', 'create_fwddc_event_post_type' );
 function add_events_meta_boxes( $post ) {
     add_meta_box( 'fwddc_event_fb', __('Facebook Event ID', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'fb', 'prefix' => 'http://facebook.com/events/' ) );
     add_meta_box( 'fwddc_event_tix', __('Ticket Link', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'tix', 'prefix' => '' ) );
+    add_meta_box( 'fwddc_event_cost', __('Current ticket price', 'roots'), 'fwddc_event_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'tix_price', 'prefix' => '' ) );
     add_meta_box( 'fwddc_event_date_startdate', __('Event Date', 'roots'), 'fwddc_event_date_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'event_date_startdate', 'prefix' => 'Start' ) );
     add_meta_box( 'fwddc_event_date_enddate', __('Event Date', 'roots'), 'fwddc_event_date_meta', 'fwddc_event', 'normal', 'default', array( 'name' => 'event_date_enddate', 'prefix' => 'End' ) );
 }
@@ -87,6 +88,7 @@ function fwddc_save_event_meta_box_data( $post_id ) {
     $meta_boxes = array(
         'fb',
         'tix',
+        'tix_price',
         'event_date_startdate',
         'event_date_enddate'
     );
@@ -110,9 +112,22 @@ function fwddc_save_event_meta_box_data( $post_id ) {
 }
 add_action( 'save_post', 'fwddc_save_event_meta_box_data' );
 
+
 /**
+ * Fixing Custom Post Query for Isotope full layout.
+ **/
+add_action( 'pre_get_posts', 'fwddc_event_isotope_pagination_slayer', 1 );
+function fwddc_event_isotope_pagination_slayer(&$query){
+	/* most rediculous function name evar. */
+
+}
+
+
+/************************************************
+ *
  * Artists Taxonomy
- */
+ *
+ ************************************************/
 function register_fwddc_artists_taxonomy(){
 	$labels = array (
         'name' 			=> _x( 'Artists', 'taxonomy general name', 'roots' ),
@@ -278,3 +293,44 @@ function populate_fwddc_venues_taxonomy(){
 	}
 }
 add_action('admin_init','populate_fwddc_venues_taxonomy');
+
+
+/*******************************************
+ * Admin Post Columns Config / Setup
+ ******************************************/
+
+function set_custom_fwddc_event_columns($columns) {
+	unset( $columns['date']);
+	$columns['thumbnail'] = __( 'Photo', 'roots' );
+	$columns['title'] = __( 'Event Name', 'roots' );
+	$columns['event_date'] = __( 'Date', 'roots' );
+
+	return $columns;
+}
+add_filter('manage_fwddc_event_posts_columns', 'set_custom_fwddc_event_columns');
+
+function fwddc_event_custom_column( $column, $post_id ) {
+	switch ( $column ) {
+		case 'thumbnail':
+			if (has_post_thumbnail( $post_id )) {
+				echo get_the_post_thumbnail( $post_id, array(75,75), array() );
+			} else {
+				echo "<img src='http://fillmurray.com/75/75'>";
+			}
+			break;
+		case 'event_date':
+			echo get_post_meta( $post_id, '_fwddc_event_event_date_startdate', TRUE );
+			break;
+		default:
+			echo "<script>console.log($column);</script>";
+			break;
+	}
+}
+add_action( 'manage_fwddc_event_posts_custom_column', 'fwddc_event_custom_column', 10, 2 );
+
+function fwddc_events_posts_column_register_sortable( $columns ) {
+	$columns['title'] = 'title';
+	$columns['event_date'] = 'event_date';
+	return $columns;
+}
+add_filter( 'manage_edit-fwddc_event_posts_sortable_columns', 'fwddc_events_posts_column_register_sortable' );

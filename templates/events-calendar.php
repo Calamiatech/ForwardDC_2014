@@ -1,7 +1,7 @@
 <section class="container-fluid">
 	<div id="filters" class="row">
 		<?php
-		/* EVENT YEAR FILTER */ 
+		/* EVENT YEAR FILTER  
 			$event_years_args = array(
 				'orderby'	=> 'name',
 				'order'		=> 'DESC',
@@ -32,21 +32,22 @@
     data-isotope-options='{ 
 		"itemSelector": ".event", 
 		"masonry": { 
-			"columnWidth": ".event", 
+			"columnWidth": ".col-lg-2", 
 			"gutter":0
 		},
 		"getSortData": {
-			"eventName": ".eventName"
+			"eventName": ".eventName",
+			"eventDate": "[data-event-date]"
 		},
 		"filter":".2014",
-		"sortBy":"eventName"
+		"sortBy":"eventDate"
 	}'>
 <?php while (have_posts()) : the_post(); ?>
   <?php get_template_part('templates/event', 'calendar'); ?>
 <?php endwhile; ?>
   </div>
 </section>
-<?php echo '<h1>'.is_page_template('archive-fwddc_event.php' ).'</h1>'; ?>
+<?php /* echo '<h1>'.is_page_template('archive-fwddc_event.php' ).'</h1>'; */ ?>
 
 <?php if ($wp_query->max_num_pages > 1) : ?>
   <nav class="post-nav">

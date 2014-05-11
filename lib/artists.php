@@ -303,9 +303,9 @@ function fwddc_artist_custom_columns( $column, $post_id ) {
 }
 add_action( 'manage_fwddc_artist_posts_custom_column' , 'fwddc_artist_custom_columns', 10, 2 );
 
-function posts_column_register_sortable( $columns ) {
+function fwddc_artists_posts_column_register_sortable( $columns ) {
     $columns['title'] = 'title';
     $columns['taxonomy-fwddc_event_year'] = 'taxonomy-fwddc_event_year';
     return $columns;
 }
-add_filter( 'manage_edit-fwddc_artist_posts_sortable_columns', 'posts_column_register_sortable' );
+add_filter( 'manage_edit-fwddc_artist_posts_sortable_columns', 'fwddc_artists_posts_column_register_sortable' );
