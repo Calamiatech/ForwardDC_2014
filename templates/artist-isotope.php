@@ -58,7 +58,7 @@ if ( $event_years && ! is_wp_error( $event_years )) {
 ?>
 
 <article <?php post_class($post_classes); ?>>    
-    <?php the_post_thumbnail('large',array('class'=>'img-responsive')); ?>
+    <?php the_post_thumbnail('medium',array('class'=>'img-responsive')); ?>
 	<h5 class="artistName"><?php the_title(); ?>
 	<?php if($soundcloud = get_post_meta( $post->ID, "_fwddc_soundcloud_url", TRUE ) ) : ?>
 	<span class="soundcloud pull-right"><a class="glyphicon glyphicon-cloud" href="https://soundcloud.com/<?php echo $soundcloud ?>"></a></span>

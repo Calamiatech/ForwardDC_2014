@@ -84,7 +84,7 @@
     data-isotope-options='{ 
 		"itemSelector": ".artist", 
 		"masonry": { 
-			"columnWidth": ".artist", 
+			"columnWidth": ".col-lg-3", 
 			"gutter":0
 		},
 		"getSortData": {

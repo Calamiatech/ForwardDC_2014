@@ -29,9 +29,10 @@ if ((!empty($event_date)) && (! is_wp_error( $event_date ))) {
 	$datediff = $d->d;
 	$datecode = $_event_date->format('Ymd');
 
-	if ( $past_event = $_event_date > new DateTime() ) {
+	if ( $_event_date > new DateTime() ) {
 	// Event is in the future...
 		$post_classes[] = "upcoming";
+		$past_event = FALSE;
 
 		if ($datediff > 0) {
 			$post_classes[] = "happening_soon";
@@ -59,6 +60,7 @@ if ((!empty($event_date)) && (! is_wp_error( $event_date ))) {
 	} 
 	else {
 	// Event is in the past...
+		$past_event = TRUE;
 		$datecode = "9".$datecode;
 		$post_classes[] = "past_event";
 		$post_classes = array_replace( 
